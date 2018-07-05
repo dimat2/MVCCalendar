@@ -92,7 +92,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
-@section Scripts {
+@section scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
@@ -107,7 +107,7 @@
                 events = [];
                 $.ajax({
                     type: "GET",
-                    url: "/home/GetEvents",
+                    url: "@Url.Action("GetEvents", "Home")",
                     success: function (data) {
                         $.each(data, function (i, v) {
                             events.push({
@@ -136,9 +136,9 @@
                     defaultDate: new Date(),
                     timeFormat: "h(:mm)a",
                     header: {
-                        left: "prev, next, today",
+                        left: "prev,next, today",
                         center: "title",
-                        right: "month, basicWeek, basicDay, agenda",
+                        right: "month,basicWeek,basicDay,agenda",
                     },
                     eventLimit: true,
                     eventColor: "#378006",
@@ -194,7 +194,7 @@
                 if (selectedEvent != null && confirm("Biztos törlöd?")) {
                     $.ajax({
                         type: "POST",
-                        url: "/Home/DeleteEvent",
+                        url: '@Url.Action("DeleteEvent", "Home")',
                         data: {"eventID": selectedEvent.eventID},
                         success: function (data) {
                             if (data.status) {
@@ -274,7 +274,7 @@
             function SaveEvent(data) {
                 $.ajax({
                     type: "POST",
-                    url: '/home/SaveEvent',
+                    url: '@Url.Action("SaveEvent", "Home")',
                     data: data,
                     success: function (data) {
                         if (data.status) {
